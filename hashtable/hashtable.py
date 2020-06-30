@@ -22,7 +22,10 @@ class HashTable:
 
     def __init__(self, capacity):
         # Your code here
-        self.capacity = [None] * MIN_CAPACITY
+
+        self.capacity = [None] * MIN_CAPACITY   #initialize array with 8 empty slots for hash table
+
+        self.length = 0     #array length starting at 0 
 
 
     def get_num_slots(self):
@@ -37,6 +40,8 @@ class HashTable:
         """
         # Your code here
 
+        return len(self.capacity)
+
 
     def get_load_factor(self):
         """
@@ -45,6 +50,15 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        
+        #get_load_factor method retrieves a value from a particular slot
+
+        #number of items stored in the table// total number of slots in the array
+        #floor division. Divides and returns the integer value of the quotient. dumps the digits after the decimal.
+
+        return self.length//self.get_num_slots()
+
+        # return self.length/self.capacity
 
 
     def fnv1(self, key):
@@ -65,6 +79,12 @@ class HashTable:
         """
         # Your code here
 
+        hash = 5381
+
+        for _ in key:
+            hash = ((hash << 5) + hash) + ord(key)
+        return hash & 0xFFFFFFFF
+
 
     def hash_index(self, key):
         """
@@ -84,6 +104,7 @@ class HashTable:
         """
         # Your code here
 
+        #put method stores value in a particular slot
 
     def delete(self, key):
         """

@@ -108,7 +108,7 @@ class HashTable:
         #put method stores value in a particular slot
 
         i = hash_index(key)
-        self.capacity[slot] = HashTableEntry(jey, value)            #making it a linked list from calling HashTableEntry class
+        self.capacity[i] = HashTableEntry(key, value)            #making it a linked list from calling HashTableEntry class
 
 
     def delete(self, key):

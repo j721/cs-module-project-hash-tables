@@ -107,7 +107,7 @@ class HashTable:
 
         #put method stores value in a particular slot
 
-        i = hash_index(key)
+        i = self.hash_index(key)
         self.capacity[i] = HashTableEntry(key, value)            #making it a linked list from calling HashTableEntry class
 
 

@@ -54,7 +54,8 @@ class HashTable:
         #get_load_factor method retrieves a value from a particular slot
 
         #number of items stored in the table// total number of slots in the array
-        #floor division. Divides and returns the integer value of the quotient. dumps the digits after the decimal.
+        #floor division:
+        # Divides and returns the integer value of the quotient. dumps the digits after the decimal.
 
         return self.length//self.get_num_slots()
 
@@ -105,6 +106,10 @@ class HashTable:
         # Your code here
 
         #put method stores value in a particular slot
+
+        i = hash_index(key)
+        self.capacity[slot] = HashTableEntry(jey, value)            #making it a linked list from calling HashTableEntry class
+
 
     def delete(self, key):
         """

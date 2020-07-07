@@ -23,9 +23,7 @@ class HashTable:
     def __init__(self, capacity):
         # Your code here
 
-        self.capacity = [None] * MIN_CAPACITY   #initialize array with 8 empty slots for hash table
-
-        self.length = 0     #array length starting at 0 
+        self.capacity = [None] * capacity  #initialize array with 8 empty slots for hash table
 
 
     def get_num_slots(self):
@@ -39,7 +37,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
+  
         return len(self.capacity)
 
 
@@ -59,7 +57,9 @@ class HashTable:
 
         return self.length//self.get_num_slots()
 
-        # return self.length/self.capacity
+        # return len(self.capacity) - self.capacity.count(None)
+
+       
 
 
     def fnv1(self, key):
@@ -82,8 +82,8 @@ class HashTable:
 
         hash = 5381
 
-        for _ in key:
-            hash = ((hash << 5) + hash) + ord(key)
+        for x in key:
+            hash = (( hash << 5) + hash) + ord(x)
         return hash & 0xFFFFFFFF
 
 
@@ -93,7 +93,7 @@ class HashTable:
         between within the storage capacity of the hash table.
         """
         #return self.fnv1(key) % self.capacity
-        return self.djb2(key) % self.capacity
+        return self.djb2(key) % len( self.capacity)
 
     def put(self, key, value):
         """
@@ -105,10 +105,21 @@ class HashTable:
         """
         # Your code here
 
-        #put method stores value in a particular slot
+        self.capacity[self.hash_index(key)] = value
 
-        i = self.hash_index(key)
-        self.capacity[i] = HashTableEntry(key, value)            #making it a linked list from calling HashTableEntry class
+
+        #put method stores value in a particular slot
+        # i = self.hash_index(key)
+
+        # if self.capacity[i] is not None:
+        #     if self.capacity[i].value is not None:
+        #         current = self.capacity[i]
+        #         self.capacity[i] = HashTableEntry(key,value)
+        #         self.capacity[i].next = current
+
+        #         self.length +=1
+
+        # self.capacity[i] = HashTableEntry(key, value)            #making it a linked list from calling HashTableEntry class
 
 
     def delete(self, key):
@@ -121,6 +132,11 @@ class HashTable:
         """
         # Your code here
 
+        #calling put method to grab the key, and the value be changed to None    
+        # self.put(key, None)    
+
+        self.capacity[self.hash_index(key)] = None
+
 
     def get(self, key):
         """
@@ -131,6 +147,16 @@ class HashTable:
         Implement this.
         """
         # Your code here
+
+        return self.capacity[self.hash_index(key)]
+
+        # s = self.hash_index(key)
+        # entry = self.capacity[s]
+
+        # if entry is not None:
+        #     return entry.value
+
+        # return None
 
 
     def resize(self, new_capacity):
@@ -178,3 +204,5 @@ if __name__ == "__main__":
         print(ht.get(f"line_{i}"))
 
     print("")
+
+

@@ -120,13 +120,25 @@ class HashTable:
 
         if self.capacity[i] is not None:  #if slot contains a key that is not None/empty          
             if self.capacity[i].value is not None:      #if value is not None 
-                current = self.capacity[i]              #set 
-                self.capacity[i] = HashTableEntry(key,value)
+                current = self.capacity[i]              #set the current pointer to the first slot in the hash table
+                self.capacity[i] = HashTableEntry(key,value)  
                 self.capacity[i].next = current
 
+                #increment length
                 self.length +=1
+                
+                if self.get_load_factor() >= 0.7:           
+                    self.resize(MIN_CAPACITY * 2)           #double the size of the hash table    
+                
+                return 
 
         self.capacity[i] = HashTableEntry(key, value)            #making it a linked list from calling HashTableEntry class
+        #increment length 
+        self.length +=1
+
+        #check for load size
+        if self.get_load_factor() >= 0.7:
+            self.resize(MIN_CAPACITY * 2)
 
 
     def delete(self, key):
@@ -139,12 +151,13 @@ class HashTable:
         """
         # Your code here
 
-        #calling put method to grab the key, and the value be changed to None    
-        # self.put(key, None)    
-
-        self.capacity[self.hash_index(key)] = None        
+        # self.capacity[self.hash_index(key)] = None     
+        #   
         #removing that value from key-value pair and set it to None
 
+        #calling put method to grab the key, and the value be changed to None    
+        self.put(key, None)    
+        self.length -=1
 
     def get(self, key):
         """
@@ -156,15 +169,20 @@ class HashTable:
         """
         # Your code here
 
-        return self.capacity[self.hash_index(key)]
+        # return self.capacity[self.hash_index(key)]
 
-        # s = self.hash_index(key)
-        # entry = self.capacity[s]
+        i = self.hash_index(key)            #index key-value pair 
+        entry = self.capacity[i]            #index key-value pair at specific slot
+    
+        if entry is not None:
+            while entry.next is not None:
+                if entry.key == key:        #reassign the pointer to the next key-value pair in the slot
+                    return entry.value
+                entry = entry.next
 
-        # if entry is not None:
-        #     return entry.value
+            return entry.value
 
-        # return None
+        return None         #else if entry and next entry node is empty return None
 
 
     def resize(self, new_capacity):

@@ -7,6 +7,9 @@ class HashTableEntry:
         self.value = value
         self.next = None
 
+        #self.next node for linked list default value to none. To allow it to refer to another hash table entry
+        #each entry is a key-value pair in the hash table
+
 
 # Hash table can't have fewer than this many slots
 MIN_CAPACITY = 8
@@ -24,6 +27,7 @@ class HashTable:
         # Your code here
 
         self.capacity = [None] * capacity  #initialize array with 8 empty slots for hash table
+        self.length = 0             #initialize length of the array to zero
 
 
     def get_num_slots(self):
@@ -51,11 +55,11 @@ class HashTable:
         
         #get_load_factor method retrieves a value from a particular slot
 
-        #number of items stored in the table// total number of slots in the array
-        #floor division:
+        #floor division method also works: return self.length//self.get_num_slots()
         # Divides and returns the integer value of the quotient. dumps the digits after the decimal.
 
-        return self.length//self.get_num_slots()
+        #number of items stored in the table/ total number of slots in the array
+        return self.length/self.get_num_slots()
 
         # return len(self.capacity) - self.capacity.count(None)
 
@@ -105,21 +109,24 @@ class HashTable:
         """
         # Your code here
 
+        #self.capacity stands for hash table. getting the slot from the hash table
+            #getting the key value from the slot in the hash table
+             #reassigning that value to the new value that is being updated with the put
         self.capacity[self.hash_index(key)] = value
 
 
-        #put method stores value in a particular slot
-        # i = self.hash_index(key)
+        #put method stores value in a particular slot. Key-value pair
+        i = self.hash_index(key)
 
-        # if self.capacity[i] is not None:
-        #     if self.capacity[i].value is not None:
-        #         current = self.capacity[i]
-        #         self.capacity[i] = HashTableEntry(key,value)
-        #         self.capacity[i].next = current
+        if self.capacity[i] is not None:  #if slot contains a key that is not None/empty          
+            if self.capacity[i].value is not None:      #if value is not None 
+                current = self.capacity[i]              #set 
+                self.capacity[i] = HashTableEntry(key,value)
+                self.capacity[i].next = current
 
-        #         self.length +=1
+                self.length +=1
 
-        # self.capacity[i] = HashTableEntry(key, value)            #making it a linked list from calling HashTableEntry class
+        self.capacity[i] = HashTableEntry(key, value)            #making it a linked list from calling HashTableEntry class
 
 
     def delete(self, key):
@@ -135,7 +142,8 @@ class HashTable:
         #calling put method to grab the key, and the value be changed to None    
         # self.put(key, None)    
 
-        self.capacity[self.hash_index(key)] = None
+        self.capacity[self.hash_index(key)] = None        
+        #removing that value from key-value pair and set it to None
 
 
     def get(self, key):

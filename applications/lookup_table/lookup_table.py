@@ -25,13 +25,14 @@ def slowfun(x, y):
     
     def slowfun_cache(x,y):
         v = math.pow(x, y)
+        #if the value is not in the cache, perform operations and add it to the cache
         if v not in cache:
             cache[v] = math.factorial(v)
             cache[v] //= (x + y)
             v %= 982451653
         print(v)
         return(v)
-        
+    #if value not in cache then just return it
     return slowfun_cache(x,y)
 
 

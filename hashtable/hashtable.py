@@ -59,7 +59,6 @@ class HashTable:
         #number of items stored in the table/ total number of slots in the array
         return self.length/self.get_num_slots()
 
-        # return len(self.capacity) - self.capacity.count(None)
 
        
 
@@ -130,7 +129,7 @@ class HashTable:
                 return 
 
         self.capacity[i] = HashTableEntry(key, value)            #making it a linked list from calling HashTableEntry class
-        #increment length 
+       
         self.length +=1                                       
 
         #check for load size

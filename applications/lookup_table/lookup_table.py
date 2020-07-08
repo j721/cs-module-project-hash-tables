@@ -1,6 +1,13 @@
 # Your code here
 
 
+#make imports from libraries
+import math
+import random
+
+#create a cache dictionary globally
+cache ={}
+
 def slowfun_too_slow(x, y):
     v = math.pow(x, y)
     v = math.factorial(v)
@@ -15,7 +22,17 @@ def slowfun(x, y):
     output, but completes quickly instead of taking ages to run.
     """
     # Your code here
-
+    
+    def slowfun_cache(x,y):
+        v = math.pow(x, y)
+        if v not in cache:
+            cache[v] = math.factorial(v)
+            cache[v] //= (x + y)
+            v %= 982451653
+        print(v)
+        return(v)
+        
+    return slowfun_cache(x,y)
 
 
 # Do not modify below this line!

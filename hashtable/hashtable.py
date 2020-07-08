@@ -26,7 +26,7 @@ class HashTable:
     def __init__(self, capacity):
         # Your code here
 
-        self.capacity = [None] * capacity  #initialize array with 8 empty slots for hash table
+        self.capacity = [None] * MIN_CAPACITY  #initialize array with 8 empty slots for hash table
         self.length = 0             #initialize length of the array to zero
 
 
@@ -52,8 +52,6 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        
-        #get_load_factor method retrieves a value from a particular slot
 
         #floor division method also works: return self.length//self.get_num_slots()
         # Divides and returns the integer value of the quotient. dumps the digits after the decimal.
@@ -97,7 +95,7 @@ class HashTable:
         between within the storage capacity of the hash table.
         """
         #return self.fnv1(key) % self.capacity
-        return self.djb2(key) % len( self.capacity)
+        return self.djb2(key) % len(self.capacity)
 
     def put(self, key, value):
         """
@@ -112,7 +110,7 @@ class HashTable:
         #self.capacity stands for hash table. getting the slot from the hash table
             #getting the key value from the slot in the hash table
              #reassigning that value to the new value that is being updated with the put
-        self.capacity[self.hash_index(key)] = value
+        # self.capacity[self.hash_index(key)] = value
 
 
         #put method stores value in a particular slot. Key-value pair
@@ -128,13 +126,12 @@ class HashTable:
                 self.length +=1
                 
                 if self.get_load_factor() >= 0.7:           
-                    self.resize(MIN_CAPACITY * 2)           #double the size of the hash table    
-                
+                    self.resize(MIN_CAPACITY * 2)           #double the size of the hash table       
                 return 
 
         self.capacity[i] = HashTableEntry(key, value)            #making it a linked list from calling HashTableEntry class
         #increment length 
-        self.length +=1
+        self.length +=1                                          # doubly linked list? 
 
         #check for load size
         if self.get_load_factor() >= 0.7:
@@ -193,6 +190,21 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        global MIN_CAPACITY
+        MIN_CAPACITY = new_capacity         #reassign MIN_CAPACITY to new_capacity 
+
+        current = self.capacity             #set current pointer
+
+        self.capacity = [None] * MIN_CAPACITY       #initialize new hash table to be resized with 8 empty slots declared earlier 
+
+        for x in current:
+            if (x is not None):
+                if (x.next is not None):
+                        pointer = x.next
+                        while pointer is not None:
+                            self.put(pointer.key, pointer.value)
+                            pointer = x.nest
+                self.put(x.key, x.value)
 
 
 
@@ -211,6 +223,7 @@ if __name__ == "__main__":
     ht.put("line_10", "Long time the manxome foe he sought--")
     ht.put("line_11", "So rested he by the Tumtum tree")
     ht.put("line_12", "And stood awhile in thought.")
+
 
     print("")
 

@@ -115,8 +115,9 @@ class HashTable:
         #put method stores value in a particular slot. Key-value pair
         i = self.hash_index(key)
 
-        if self.capacity[i] is not None:  #if slot contains a key that is not None/empty          
-            if self.capacity[i].value is not None:      #if value is not None. with the put we want to update the value that's why we are checking if its not None
+        if self.capacity[i] is not None:  #if slot contains a key that is not None/empty  
+            #if value is not None.      
+            if self.capacity[i].value is not None:    
                 current = self.capacity[i]              #set the current pointer to the first slot in the hash table
                 self.capacity[i] = HashTableEntry(key,value)  #linking the class HashTableEntry and grabbing those values to link it
                 self.capacity[i].next = current     #next pointer updated to our new current value
@@ -172,7 +173,7 @@ class HashTable:
     
         if entry is not None:
             while entry.next is not None:
-                if entry.key == key:        #reassign the pointer to the next key-value pair in the slot
+                if entry.key == key:        #if key in the slot matches that the key that is wanting to be retrieved  return the value
                     return entry.value
                 entry = entry.next
 

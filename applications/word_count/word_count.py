@@ -5,6 +5,7 @@ input- takes a single string
 output- returns a dictionary of words and their counts
         -keys all lowercased 
         -split the strings into words on any whitespace
+        -split method: splits a string into a list
        
 If the input contains no ignored characters, return an empty dictionary.
 """

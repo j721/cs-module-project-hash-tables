@@ -22,17 +22,6 @@
 
 # If the input contains no ignored characters, print nothing.
 
-"""
-Hint
------------
-Items: .items() method on a dictionary might be useful.
-
-Sorting: it's possible for .sort() to sort on multiple keys at once.
-
-Sorting: negatives might help where reverse won't.
-
-Printing: you can print a variable field width in an f-string with nested braces, like so {x:{y}}
-"""
 #similar to word_count
 
 
@@ -42,14 +31,62 @@ ignore = ['"', ':', ';', ',', '.', '-', '+', '=', '/', '\\', '|', '[', ']', '{',
 
 def histogram():
 
+    #counts dictionary for updated string
     counts ={}
 
     #need to open the filename "robin.text"
-
-    with open ("robin.text") as f:
+    with open ("robin.txt") as f:
         words = f.read()
         split_words = words.split()     #split the string file into a list of words
     
     for word in split_words:
         #new histogram to be generated starts off with an empty string
         histo = ""
+
+        for character in word:
+            if character not in ignore:
+                histo += character
+        word = histo.lower() #lowercase the new_word string
+
+        #update the counts dictionary with the updated word
+        if word in counts:
+            counts[word] += 1
+        #else if there is no word, just an empty string break/stop running the method
+        elif word == "" or word == " ":
+            break
+        #else if there is already a word in counts have that value set to 1 
+        else:
+            counts[word] = 1
+    
+
+
+    #create a list of items that returns a key-value tuple pair in the counts dictionary
+    items = list(counts.items())     
+    #sort using anonymous function starting from negative range to start from largest to smallest number of duplicates
+    items.sort(key = lambda e: (-e[1], e[0]))
+    #convert list of items into a dictionary and add into counts
+    counts = (dict(items))
+    #loop through the counts list and check for the string and value(number of duplicates) 
+    for (string, value) in counts.items():
+        #max method returns the largest item in an iterable
+        #returns the string with the longest length (number of duplicates)
+        max_len = len(max(string, key=len))
+        print(f'{string} {" " * max_len} {"#" * value}')
+
+print(histogram())
+
+
+
+
+"""
+Hint
+-----------
+Items: .items() method on a dictionary might be useful.
+    -items() method returns a view object that displays a list of a given dictionary's (key, value) tuple pair.
+
+Sorting: it's possible for .sort() to sort on multiple keys at once.
+
+Sorting: negatives might help where reverse won't.
+
+Printing: you can print a variable field width in an f-string with nested braces, like so {x:{y}}
+"""

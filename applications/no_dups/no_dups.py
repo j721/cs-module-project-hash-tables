@@ -12,7 +12,16 @@ split method- splits a string into a list
 
 def no_dups(s):
     # Your code here
+    #use split method to create string array
+    string_array = s.split()
 
+    #create array to hold no_duplicates
+    no_duplicates = []
+
+    for i in string_array:
+        if i not in no_duplicates:
+            no_duplicates.append(i)
+    return ' '.join(no_duplicates)
 
 
 

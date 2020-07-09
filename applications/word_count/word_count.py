@@ -45,36 +45,6 @@ def word_count(s):
 
 
 
-# def word_count(s):
-#     # Your code here
-#     ignored = ['"', ':', ';', ',', '.', '-', '+', '=', '/', '\\', '|', '[', ']', '{', '}', '(', ')', '*', '^', '&']
-
-#     #create a dictionary for word count to be returned
-#     counts = {}
-
-    
-#     for word in s.split():
-#         new_word = ""
-#         for character in word:
-#             if character not in ignored:
-#                 new_word +=character
-
-#         word = new_word.lower()
-       
-#         if word in counts:
-#             counts[word] +=1
-#         elif word == "" or word == " ":
-#             break
-#         else:
-#             counts[word] = 1
-        
-#         if s == "":
-#             return {}
-#         else:
-#             return counts
-
-
-
 if __name__ == "__main__":
     print(word_count(""))
     print(word_count("Hello"))

@@ -50,3 +50,21 @@ for x in range(5):
     print(f"random sentence {x}:")
 
     sentence = ""
+
+    #randomize lookup list of words
+    current_word = random.choice(list(lookup))
+
+    for w in range(random.randint(5,20)):
+        sentence += current_word
+        sentence += " "
+        options = lookup[current_word]
+        current_word = random.choice(options)
+
+    print(sentence[:-1] + ".")
+
+"""
+
+random.choice() can choose a random word out of a list.
+print(s, end=" ") will print a space after every word instead of a newline.
+
+"""    

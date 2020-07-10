@@ -3,39 +3,10 @@
 
 # Your code here
 
-#import from collections library the Counter function- allows for elements to be stored as dictionary keys and their counts stored as dictionary values. Allows for cunting of hashable objects 
-# from collections import Counter
-
-# letters = ['E', 'T', 'A', 'O', 'H', 'N', 'R', 'I', 'S', 'D', 'L', 'W', 'U','G', 'F', 'B', 'M', 'Y', 'C', 'P', 'K', 'V', 'Q', 'J', 'X', 'Z']
-
-# #need to import ciphertext.txt file
-# with open("ciphertext.txt") as f:
-#     text = f.read()
-
-# c = Counter(filter(str.isalnum, text))
-
-          #assign key and value in zip format starting from index of 0, and search for the most common letters in frequency  
-          # zip function returns an iterator of tuples based on the iterable objects.
-
-# map = {k:v for (k, v) in zip ([i[0] for i in c.most_common()], letters)}
-
-# output =""
-
-# for character in text:
-#     output_character = character
-#     if character in map.keys():           #keys method displays a list of leys
-#         output_character = map[character]
-#     output +=output_character
-
-# print(output)
-
-
-
-#create a hash table of frequencies
-
 with open("ciphertext.txt") as f:
     text = f.read()
 
+#create a hash table of frequencies
 freq = {}
 for char in text:
     #if the characters does not equal any of the characters to ignore
@@ -80,3 +51,33 @@ for char in text:
         final += cypher[char]
 
 print(final)
+
+
+
+
+
+#import from collections library the Counter function- allows for elements to be stored as dictionary keys and their counts stored as dictionary values. Allows for cunting of hashable objects 
+# from collections import Counter
+
+# letters = ['E', 'T', 'A', 'O', 'H', 'N', 'R', 'I', 'S', 'D', 'L', 'W', 'U','G', 'F', 'B', 'M', 'Y', 'C', 'P', 'K', 'V', 'Q', 'J', 'X', 'Z']
+
+# #need to import ciphertext.txt file
+# with open("ciphertext.txt") as f:
+#     text = f.read()
+
+# c = Counter(filter(str.isalnum, text))
+
+          #assign key and value in zip format starting from index of 0, and search for the most common letters in frequency  
+          # zip function returns an iterator of tuples based on the iterable objects.
+
+# map = {k:v for (k, v) in zip ([i[0] for i in c.most_common()], letters)}
+
+# output =""
+
+# for character in text:
+#     output_character = character
+#     if character in map.keys():           #keys method displays a list of leys
+#         output_character = map[character]
+#     output +=output_character
+
+# print(output)

@@ -30,12 +30,13 @@ for x in q:
         val = f(x) - f(y)
         if val not in sum_values:
             sum_values[val] = []
-        sum_values[val].append((x,y,False)) 
+        sum_values[val].append((x,y,False)) #set to false for subtraction
 
 for x in list(sum_values):
     tuples = sum_values[x]
 
     if len(tuples) > 1:
+                    # Bitwise xor operator (^): Returns 1 if one of the bit is 1 and other is 0 else returns false.
         if tuples[0][2] ^ tuples[1][2]:
             print(f"{tuples[0][0:2]} and {tuples [1][0:2]}")
 

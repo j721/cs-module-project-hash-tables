@@ -34,7 +34,7 @@ def histogram():
     #counts dictionary for updated string
     counts ={}
 
-    #need to open the filename "robin.text"
+    #need to open the filename "robin.txt"
     with open ("robin.txt") as f:
         words = f.read()
         split_words = words.split()     #split the string file into a list of words
@@ -62,20 +62,19 @@ def histogram():
 
     #create a list of items that returns a key-value tuple pair in the counts dictionary
     items = list(counts.items())     
-    #sort using anonymous function starting from negative range to start from largest to smallest number of duplicates
+    #sort using anonymous function starting from negative range to start from largest to smallest number of duplicates. determining the order of the list
     items.sort(key = lambda e: (-e[1], e[0]))
-    #convert list of items into a dictionary and add into counts
+    #convert list of items (key-value pair) into a dictionary and add into counts
     counts = (dict(items))
     #loop through the counts list and check for the string and value(number of duplicates) 
     for (string, value) in counts.items():
         #max method returns the largest item in an iterable
         #returns the string with the longest length (number of duplicates)
+                                  #key function iterables are passed on comparison of length performed on return value      
         max_len = len(max(string, key=len))
         print(f'{string} {" " * max_len} {"#" * value}')
-
+        #print our string that is being looped that is our word, then printing out the max length the one from highest number of duplicates to lowest, then going to print value which is hashes
 print(histogram())
-
-
 
 
 """

@@ -10,6 +10,7 @@ output- returns a dictionary of words and their counts
 If the input contains no ignored characters, return an empty dictionary.
 """
 
+import re
 
 #create an array to ignore certain characters in the string
 ignore = ['"', ':', ';', ',', '.', '-', '+', '=', '/', '\\', '|', '[', ']', '{', '}', '(', ')', '*', '^', '&']

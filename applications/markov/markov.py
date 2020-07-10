@@ -54,16 +54,19 @@ for x in range(5):
     #randomize lookup list of words
     current_word = random.choice(list(lookup))
 
+    #word looped through randomized number range from 5 to 20
     for w in range(random.randint(5,20)):
-        sentence += current_word
+        #add current_word and have it passed in as a string into the lookup
+        sentence += current_word     
         sentence += " "
-        options = lookup[current_word]
-        current_word = random.choice(options)
+        #have option variable hold current word and randomize it
+        opt = lookup[current_word]
+        current_word = random.choice(opt)
 
     print(sentence[:-1] + ".")
 
 """
-
+Hints:
 random.choice() can choose a random word out of a list.
 print(s, end=" ") will print a space after every word instead of a newline.
 
